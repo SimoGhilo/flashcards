@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { addQuizId } from "../topics/topicSlice";
 
 const initialState = {
     quizzes: {}
@@ -26,13 +27,15 @@ export const { addQuiz } = quizSlice.actions;
 
 export default quizSlice.reducer;
 
-////Point 12:
 
 
-export const createQuiz = (dispatch, payload) => {
-    return (dispatch) => {
+export const createQuiz = (payload) => {
+    return (dispatch, getState) => {
+        console.log(payload)
         dispatch(addQuiz(payload));
+
+        dispatch(addQuizId({ quizId: payload.id, topicId: payload.topicId }));
         //second dispatch?
-        // async function ?
+        ///Am i supposed to dispatch the actions from here or from the handleSubmit function in the quiz form ? (points 12/14)
     }
 }

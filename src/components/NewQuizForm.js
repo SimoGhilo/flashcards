@@ -22,21 +22,19 @@ export default function NewQuizForm() {
       return;
     }
 
+
+
     const cardIds = [];
+    for (let c of cards) {
+      var cardObj = { id: uuidv4(), front: c.front, back: cardIds.back }
+      dispatch(addCard(cardObj));
+      cardIds.push(cardObj.id);
+    }
     var obj = { id: uuidv4(), name: name, topicId: topicId, cardIds: cardIds };
-
-    // create the new cards here and add each card's id to cardIds
-    //point 17:
-    const card = {
-      id: uuidv4(), // what goes here ? --> front:  back: }
-      cardIds.push(card.id);
-
-      dispatch(addCard(card));
-    // create the new quiz here
     dispatch(createQuiz(obj));
 
-    history.push(ROUTES.quizzesRoute());
-  };
+  }
+
 
   const addCardInputs = (e) => {
     e.preventDefault();
@@ -54,10 +52,11 @@ export default function NewQuizForm() {
     setCards(newCards);
   };
 
+
   return (
     <section>
       <h1>Create a new quiz</h1>
-      <form onSubmit={handleSubmit}>
+      <form>
         <input
           id="quiz-name"
           value={name}
@@ -106,9 +105,9 @@ export default function NewQuizForm() {
         ))}
         <div className="actions-container">
           <button onClick={addCardInputs}>Add a Card</button>
-          <button>Create Quiz</button>
+          <button onClick={handleSubmit}>Create Quiz</button>
         </div>
       </form>
     </section>
   );
-}
+}        

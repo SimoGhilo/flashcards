@@ -15,9 +15,9 @@ const topics = {
 
         },
         addQuizId: (state = initialState, action) => {
-            ///Point 11 ????
 
-            action.quizIds.push(state.topics[action.payload.id]);
+            var topic = state.topics[action.payload.topicId];
+            topic.quizIds.push(action.payload.quizId);
         }
     }
 
